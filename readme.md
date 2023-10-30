@@ -2,7 +2,7 @@
 
 Basic Todo list App to learn C# and .NET framework
 
-- [ x ] persists todos in a file 
+- [x] persists todos in a file 
 
 - [ ] persist todos in a database
 
