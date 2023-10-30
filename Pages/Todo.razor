@@ -1,4 +1,5 @@
 ﻿@page "/todo"
+@inject TodoService todoService
 
 <PageTitle>Todo</PageTitle>
 
@@ -10,6 +11,7 @@
         <li>
             <input type="checkbox" @bind="todo.IsDone">
             <input type="text" @bind="todo.Title">
+            <button @onclick="() => DeleteTodo(todo) ">X</button>
         </li>
     }
 </ul>
@@ -23,13 +25,26 @@
     private string? newTodo;
 
 
+    protected override void OnInitialized()
+    {
+        todos = todoService.GetTodoFromFile();
+    }
+
     private void AddTodo()
     {
         if (!string.IsNullOrWhiteSpace(newTodo))
         {
-            todos.Add(new TodoItem { Title = newTodo });
+            var todo = new TodoItem { Title = newTodo };
+            todoService.AddTodo(todo);
+            todos = todoService.GetTodos();
             newTodo = string.Empty;
         }
 
+    }
+
+    private void DeleteTodo(TodoItem todo)
+    {
+        todoService.DeleteTodo(todo);
+        todos = todoService.GetTodos();
     }
 }
