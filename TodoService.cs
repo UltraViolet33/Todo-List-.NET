@@ -1,5 +1,3 @@
-
-
 using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Serialization;
 using TodoList.Pages;
@@ -27,7 +25,6 @@ public class TodoService
     }
 
 
-
     public List<TodoItem> GetTodoFromFile()
     {
         string json = System.IO.File.ReadAllText("todos.json");
@@ -44,5 +41,4 @@ public class TodoService
         string json = System.Text.Json.JsonSerializer.Serialize(todos);
         System.IO.File.WriteAllText("todos.json", json);
     }
-
 }
